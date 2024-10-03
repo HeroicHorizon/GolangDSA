@@ -25,4 +25,10 @@ jobs:
       run: go build -v ./../...  # Build the entire project
 
     - name: Run Tests
-      run: go test -v ./../...  # Run all tests in the project
+      run: | # Run all tests in the project
+          for d in */ ; do
+            echo "Running tests for $d"
+            cd $d
+            go test ./...
+            cd ..
+          done 
